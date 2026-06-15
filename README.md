@@ -28,8 +28,6 @@ Before modifying any system files, you must enable root access directly from the
 3. Look for the **Root Account** option and enable it.
 4. Accept the disclaimer. A password will be displayed on the screen. **Save this password**.
 
-*(Add an image of the printer screen here if available)*
-`![Enable Root](images/sua_foto_da_tela.png)`
 
 ### Step 2: Prepare the USB Drive
 1. Download the base firmware (`CR4CU220812S11_ota_img_V1.3.3.29.img`) and copy it to the root directory of your USB drive. Do not rename the file.
@@ -41,10 +39,9 @@ Open your Command Prompt (CMD) or Windows Terminal and connect to the printer us
 ```bash
 ssh root@xxx.xxx.x.xx
 
-(Replace 192.168.0.xx with your printer's actual IP address).
+(Replace xxx.xxx.x.xx with your printer's actual IP address).
 When prompted, type yes to accept the fingerprint, and then enter the password you got from the printer screen.
 
-![SSH Login](images/Captura de tela 2026-06-14 192452.png)
 
 Step 4: The Version Check Bypass (The Trick)
 By default, the Creality system blocks downgrades with an ota: stoped version_is_new error because the system partition is Read-Only. We will copy the updater script to a writable folder, disable the version check, and run it.
@@ -53,26 +50,27 @@ Run the following commands one by one in your SSH terminal:
 
 1. Copy the updater script to the user data folder:
 
+```bash
 cp /etc/ota_bin/local_ota_update.sh /usr/data/bypass_update.sh
 
 2. Comment out the version check logic (Lines 365 to 381) using sed:
 
+```bash
 sed -i '365,381 s/^/#/' /usr/data/bypass_update.sh
 
-![Bypass Commands](images/Captura de tela 2026-06-14 194113.png)
 
 Step 5: Execute the Downgrade
 Now, run the modified script, pointing it to the firmware file on your USB drive (usually located inside /tmp/udisk/sda1/).
 
 Run this command:
 
+```bash
 sh /usr/data/bypass_update.sh /tmp/udisk/sda*/CR4CU220812S11_ota_img_V1.3.3.29.img
 
 (Note: We use sda* because the USB mount point can sometimes be sda1, sdb1, etc.)
 
 Wait for the process to complete. You will see several lines processing data. It is finished when you see ota: stoped success.
 
-![Downgrade Success](images/Captura de tela 2026-06-14 194517.png)
 
 Step 6: Target Firmware Clean Install
 Once the script finishes successfully:
@@ -83,7 +81,7 @@ Remove the USB drive from the printer and plug it back into your computer.
 
 Delete the base firmware (V1.3.3.29.img) from the USB drive.
 
-Copy your target firmware file (e.g., CR4CU220812S11_ota_img_V1.3.3.34.img) to the root of the USB drive.
+Copy your target firmware file (e.g., CR4CU220812S11_ota_img_V1.3.3.36.img) to the root of the USB drive.
 
 With the printer still turned off, insert the USB drive.
 
