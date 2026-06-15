@@ -1,10 +1,7 @@
-# K1Max-Downgrade-Firmware
-This repository provides a reliable, automated SSH script to downgrade the Creality K1 Max. By rolling back to the CR4CU220812S11_ota_img_V1.3.3.29 base image using a USB drive, it establishes a safe and clean environment for subsequent firmware updates and custom Klipper integrations.
+# K1 Max Downgrade Firmware
 
+This repository provides a reliable guide and workaround to safely downgrade the Creality K1 Max. By rolling back to the `CR4CU220812S11_ota_img_V1.3.3.29` base image using a USB drive, it bypasses the native Creality version check, establishing a safe and clean environment for subsequent firmware updates and custom Klipper integrations.
 
-# K1Max Downgrade Firmware
-
-Automated guide and workaround to safely downgrade the Creality K1 Max firmware to the base V1.3.3.29 version via USB drive. This method bypasses the native Creality version check, allowing a clean downgrade environment to resolve update conflicts or prepare the machine for custom Klipper integrations.
 
 **License:** MIT License
 
