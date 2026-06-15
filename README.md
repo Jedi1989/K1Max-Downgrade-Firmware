@@ -38,6 +38,7 @@ Open your Command Prompt (CMD) or Windows Terminal and connect to the printer us
 
 ```bash
 ssh root@xxx.xxx.x.xx
+```
 
 (Replace xxx.xxx.x.xx with your printer's actual IP address).
 When prompted, type yes to accept the fingerprint, and then enter the password you got from the printer screen.
@@ -52,12 +53,13 @@ Run the following commands one by one in your SSH terminal:
 
 ```bash
 cp /etc/ota_bin/local_ota_update.sh /usr/data/bypass_update.sh
+```
 
 2. Comment out the version check logic (Lines 365 to 381) using sed:
 
 ```bash
 sed -i '365,381 s/^/#/' /usr/data/bypass_update.sh
-
+```
 
 Step 5: Execute the Downgrade
 Now, run the modified script, pointing it to the firmware file on your USB drive (usually located inside /tmp/udisk/sda1/).
@@ -66,6 +68,7 @@ Run this command:
 
 ```bash
 sh /usr/data/bypass_update.sh /tmp/udisk/sda*/CR4CU220812S11_ota_img_V1.3.3.29.img
+```
 
 (Note: We use sda* because the USB mount point can sometimes be sda1, sdb1, etc.)
 
